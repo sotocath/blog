@@ -1,4 +1,5 @@
 @import "../node_modules/normalize.css/normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 * {
 	box-sizing: inherit;
@@ -10,11 +11,6 @@ body {
 	font-family: "Nunito", "Arial", "Helvetica", sans-serif;
 }
 
-.container {
-	padding: 20px calc(50% - 500px);
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 40px;
-}
+
 
 
