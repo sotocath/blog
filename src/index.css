@@ -10,7 +10,9 @@ html {
 body {
 	font-family: "Nunito", "Arial", "Helvetica", sans-serif;
 }
-
+.searchItem{
+	padding: 20px calc(50% - 620px);
+}
 
 
 

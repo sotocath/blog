@@ -3,11 +3,13 @@ import "./index.css";
 import Card from "../Card";
 import data from "../../data.json"
 
-const Main =() =>{
+const Main =({search, setCnt}) =>{
+    const cards = data.filter( el => el.name.toLowerCase().includes(search.toLowerCase()));
+    setCnt(cards.length);
     return (
         <main>
             <div className="cards-container">
-                {data.map(el => <Card text={el.name} key={el.id} pic={el.picture} author={el.author}/>)}
+                {cards.map(el => <Card text={el.name} key={el.id} pic={el.picture} author={el.author}/>)}
             </div>
         </main>
     )
