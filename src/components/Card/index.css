@@ -6,6 +6,7 @@
     display: grid;
     gap: 10px;
     position: relative;
+    cursor: pointer;
 }
 .card__img{
     height: 250px;
@@ -13,6 +14,7 @@
     box-shadow: 5px 5px 10px 0 #0008;
     margin-right: 15px;
     margin-left: 15px;
+    /* margin-top: 20px; */
 }
 .name__avtor{
     font-weight: bold;
@@ -28,4 +30,10 @@
     position: absolute;
     top: 5px;
     left: calc(50% - 10px )
+}
+.card__like{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
 }

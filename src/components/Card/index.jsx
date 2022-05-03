@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./index.css";
 import pic from "./img/earth-asia-solid.svg";
 import img from "./img/pngwing.png";
 import likeTrue from "../../accets/like_fill.svg";
 import likeFalse from "../../accets/like_stroke.svg";
 import { useNavigate } from "react-router-dom";
+import api from "../../Api";
+import { UserCtx } from "../../context/UserContext";
+import { FavCtx } from "../../context/FavoritesContext";
 
 const Card = (props) => {
     let st = {
@@ -16,12 +19,18 @@ const Card = (props) => {
         marginBottom: "15px",
         marginTop: "15px"
     };
-
-    const [like, setLike] = useState(false);
+    const {setFavorites} = useContext(FavCtx)
+    const {user}= useContext(UserCtx);
+    const [like, setLike] = useState(props.likes.includes(user));
     const navigate = useNavigate();
     const likeHandler = (e) => {
         e.stopPropagation();
-        setLike(!like)
+        setLike(!like);
+        api.setPostLike(props.id, like)
+        .then(ans => {
+            console.log(ans);
+            setFavorites(ans);
+        });
     }
     const replaceHandler = (e) => {
         navigate(`/posts/${props.id}`);

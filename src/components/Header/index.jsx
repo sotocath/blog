@@ -7,7 +7,7 @@ import { UserCtx } from "../../context/UserContext";
 
 
 
-const Header = ({searchText, changeText}) => {
+const Header = ({searchText, changeText, likes}) => {
    const {user} = useContext(UserCtx);
     return(
         <header className="header">
@@ -17,7 +17,8 @@ const Header = ({searchText, changeText}) => {
              <Link to="/">Главная</Link>
              <Link to="/catalog">Каталог</Link>
              <Link to="/cart">Корзина</Link> 
-             <Link to="/favorites" className="favorites" ></Link> 
+             <Link to="/favorites" className="favorites" alt="Избранное">
+                 <span className="header__likes">{likes}</span></Link> 
              <Link to={user ? "/profile" : "/signin"}>Войти/Регистрация</Link>
             </nav>
         </header>

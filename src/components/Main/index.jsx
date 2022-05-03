@@ -12,14 +12,14 @@ import Signup from "../../pages/Signup";
 
 
 
-const Main =({search, setCnt}) =>{
+const Main =({search, setCnt, updFav}) =>{
     
     return (
         <main>
             
             <Routes>
             <Route path="/catalog" element={<Home/>}/>
-            <Route path="/" element={<Catalog searchText={search} setCnt={setCnt}  />}
+            <Route path="/" element={<Catalog updFav={updFav} searchText={search} setCnt={setCnt}  />}
             />
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/posts/:id" element={<Post/>}></Route>

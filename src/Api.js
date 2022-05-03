@@ -23,6 +23,14 @@ class Api {
             }
         }).then(resHandler);
     }
+    setPostLike(id,isLike){
+        return fetch(`${this.path}/posts/likes/${id}`, {
+            method: isLike ? "delete" : "put",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        }).then(resHandler);
+    }
     signup(body){
         return fetch(`${this.path}/signup`, {
             method: "post",
