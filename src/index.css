@@ -13,6 +13,18 @@ body {
 .searchItem{
 	padding: 20px calc(50% - 620px);
 }
+.logout {
+	cursor: pointer;
+	background-color: #4682B4;
+	border: 2px #0005 outset;
+	border-radius: 8px;
+	padding: 5px 30px;
+	box-shadow:2px 2px 10px 0 #0008; ;
+
+}
+.logout:hover{
+	background-color:  rgb(72, 212, 212);
+}
 
 
 

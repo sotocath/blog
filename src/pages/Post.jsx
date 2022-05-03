@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import api from "../Api";
-import like from "../components/Main/img/heart-solid.svg";
+import like from "../accets/like_fill.svg";
 
 const Post =() => {
     let {id} = useParams();

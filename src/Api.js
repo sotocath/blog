@@ -23,6 +23,24 @@ class Api {
             }
         }).then(resHandler);
     }
+    signup(body){
+        return fetch(`${this.path}/signup`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
+    login(body){
+        return fetch(`${this.path}/signin`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
 }
 const config = {
     path: "https://api.react-learning.ru",

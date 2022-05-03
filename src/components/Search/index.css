@@ -10,8 +10,8 @@ input{
 background-color: #fff;
 border: none;
 outline: none;
-padding: 12px 20 px;
-border-radius: 5px;
+padding: 12px 20px;
+border-radius: 10px;
 }
 .search-btn{
     background: transparent;
@@ -21,6 +21,6 @@ border-radius: 5px;
     right: 12px;
 }
 .close, .icon{
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
 }
