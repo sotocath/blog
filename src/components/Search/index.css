@@ -12,6 +12,7 @@ border: none;
 outline: none;
 padding: 12px 20px;
 border-radius: 10px;
+
 }
 .search-btn{
     background: transparent;
@@ -23,4 +24,20 @@ border-radius: 10px;
 .close, .icon{
     width: 15px;
     height: 15px;
+}
+.search__results{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid;
+    background-color: white;
+    border-radius: 15px;
+    position: absolute;
+    min-width: 320px;
+    padding: 20px 20px;
+    z-index: 1000;
+    /* right: 10px; */
+}
+.search__form{
+    position: relative;
 }

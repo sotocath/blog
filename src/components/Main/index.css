@@ -21,63 +21,6 @@ h1 {
     text-decoration: none;
 
 }
-.pict {
-  width: 200px; 
-  height: 150px; 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  margin-right: 60px;
-  border-radius: 3px;
-  box-shadow: 2px 2px 10px 0 #0008;
-}
-.postText{
-    padding: 40px calc(50% - 620px);
-    display: flex;
-    
-}
-.postTitle{
-    padding: 15px 15px;
-}
-.textBlock{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.postTitle h1,h2 {
-    font-weight: bold;
-    color: darkSlateGrey;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.like{
-    width: 25px;
-    height: 25px;
-    padding-left: -20px;
-    padding-top: -10px;
-}
-.likes{
-    font-family: cursive;
-    color: grey;
-    
-    position: absolute;
-}
-.postTitle h1{
-    font-size: 3em;
-}
-.postTitle h2{
-    font-size: 1.5em; 
-}
-.comms{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 15px;
-}
-.text_post{
-    margin-bottom: 20px;
-}
-h4{
-    margin-bottom: 5px;
-}
+
+
+

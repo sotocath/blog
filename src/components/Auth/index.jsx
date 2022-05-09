@@ -40,8 +40,8 @@ export default ({login}) =>{
         <h1>{login ? "Вход" : "Регистрация"}</h1>
             <input type="email" placeholder="@mail" name="email" value={val} required onInput={e => changeVal(e.target.value)}/>
             <input type="password" placeholder="password" name="password" value={pwd} required onInput={e => changePwd(e.target.value)}/>
-            <button type="submit">{login ? "Войти" : "Зарегистрироваться"}</button>
-            <Link to={login ? "/signup" : "/signin"}><button type="button">{login ? "Регистрация" : "Войти"}</button></Link>
+            <button className="button" type="submit">{login ? "Войти" : "Зарегистрироваться"}</button>
+            <Link to={login ? "/signup" : "/signin"}><button className="button" type="button">{login ? "Регистрация" : "Войти"}</button></Link>
         </form>
     </div>
     )

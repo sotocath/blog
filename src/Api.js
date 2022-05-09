@@ -11,6 +11,7 @@ class Api {
     }
     getPostsList() {
         return fetch(`${this.path}/posts`, {
+            method:"get",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -18,9 +19,27 @@ class Api {
     }
     getPost(id) {
         return fetch(`${this.path}/posts/${id}`, {
+            method:"get",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
+        }).then(resHandler);
+    }
+    getPostComments(id) {
+        return fetch(`${this.path}/posts/comments/${id}`, {
+            method:"get",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        }).then(resHandler);
+    }
+    addPostComment(id, body){
+        return fetch(`${this.path}/posts/comments/${id}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
         }).then(resHandler);
     }
     setPostLike(id,isLike){
