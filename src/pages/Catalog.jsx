@@ -85,7 +85,7 @@ const Catalog = ({ updFav }) => {
 
     return (
         <>
-            <h1>Каталог</h1>
+            <h1>Все посты</h1>
             {text && <div className="searchItem">По запросу <strong>{text}</strong> найдено {search().length} статей</div>}
             <div className="page-container">
                 {setPagination(dataPag.maxPage, page)}

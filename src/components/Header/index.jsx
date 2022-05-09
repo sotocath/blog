@@ -15,11 +15,12 @@ const Header = ({ likes}) => {
         <>
         <header className="header">
             <Logo/>
+           
             <Search />
             <nav>
-             <Link to="/">Главная</Link>
-             <Link to="/catalog">Каталог</Link>
-             <Link to="/cart">Корзина</Link> 
+             <Link to="/posts/add">Написать пост</Link>
+             {/* <Link to="/catalog">Каталог</Link>
+             <Link to="/cart">Корзина</Link>  */}
              <Link to="/favorites" className="favorites" alt="Избранное">
                  <span className="header__likes">{likes}</span></Link> 
              <Link to={user ? "/profile" : "/signin"}>Войти/Регистрация</Link>

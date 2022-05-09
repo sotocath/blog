@@ -128,28 +128,20 @@ h4{
     width: 300px;
     
 }
-.comms__form>textarea{
-    border: grey 1px solid;
-    
-    resize: none;
-    padding: 20px 30px;
-    
+.comms__form textarea{
+    box-shadow: 1px -1px 26px -2px rgba(34, 60, 80, 0.2) inset;
+    min-height: 160px;
 }
-.comms__form>textarea:focus{
-    outline: none;
-    border: #4682B4 2px solid; 
+
+.post__edit {
+    text-align: right;
 }
-textarea::-webkit-scrollbar {
-    
-    width: 12px;
-    background-color: #F5F5F5; }
-  
-  textarea::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color:#4682B4; 
-}
-/* .comms__form{
+.buttons{
+    margin-top: 30px;
     display: flex;
-    justify-content: center;
-} */
+    justify-content: space-between;
+}
+.buttons__edit{
+    display: flex;
+    gap: 20px;
+}

@@ -25,6 +25,36 @@ class Api {
             }
         }).then(resHandler);
     }
+    addPost(body){
+        return fetch(`${this.path}/posts`, {
+            method: "post",
+            headers: {
+                "authorization": `Bearer ${this.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
+    editPost(id, body){
+        return fetch(`${this.path}/posts/${id}`, {
+            method: "patch",
+            headers: {
+                "authorization": `Bearer ${this.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
+    deletePost(id){
+        return fetch(`${this.path}/posts/${id}`, {
+            method: "delete",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        }).then(resHandler);
+    }
+    
+
     getPostComments(id) {
         return fetch(`${this.path}/posts/comments/${id}`, {
             method:"get",
@@ -37,6 +67,7 @@ class Api {
         return fetch(`${this.path}/posts/comments/${id}`, {
             method: "post",
             headers: {
+                "authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
@@ -71,7 +102,8 @@ class Api {
 }
 const config = {
     path: "https://api.react-learning.ru",
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac"
+    token: localStorage.getItem("token")
+    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac"
 }
 const api = new Api(config);
 

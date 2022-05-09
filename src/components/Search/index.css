@@ -6,14 +6,7 @@ form{
     position: relative;
     justify-content: center;
 }
-input{
-background-color: #fff;
-border: none;
-outline: none;
-padding: 12px 20px;
-border-radius: 10px;
 
-}
 .search-btn{
     background: transparent;
     border: none;
