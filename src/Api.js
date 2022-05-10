@@ -1,5 +1,4 @@
 const resHandler = res => {
-    // console.log(res);
     return res.ok ? res.json() : res.statusText;
     
 }

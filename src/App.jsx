@@ -8,9 +8,6 @@ import { FavCtx } from "./context/FavoritesContext";
 import { PostsCtx } from "./context/PostsContext";
 import api from "./Api";
 
-// import Home from "./pages/Home";
-// import Catalog from "./pages/Catalog";
-// import Cart from "./pages/Cart";
 
 const App = () => {
     const [searchText, changeText] = useState("");
@@ -22,8 +19,6 @@ const App = () => {
     
     useEffect(()=>{
         api.getPostsList().then(posts => {
-            console.log(posts);
-            // updCards(posts);
             updFav(posts.filter(el => el.likes.includes(user)))
             setPosts(posts);
     
@@ -67,7 +62,7 @@ const App = () => {
                 <div className='container'>
                     <Header  likes={favorites.length} />
 
-                    <Main updFav={updFav} />
+                    <Main />
                     <Footer />
                 </div>
                 </PostsCtx.Provider>

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../Api";
 import { UserCtx } from "../../context/UserContext";
 import { FavCtx } from "../../context/FavoritesContext";
+import { PostsCtx } from "../../context/PostsContext";
 
 const Card = (props) => {
     let st = {
@@ -23,16 +24,17 @@ const Card = (props) => {
     const {user}= useContext(UserCtx);
     const [like, setLike] = useState(props.likes.includes(user));
     const navigate = useNavigate();
+    const {setText} = useContext(PostsCtx)
     const likeHandler = (e) => {
         e.stopPropagation();
         setLike(!like);
         api.setPostLike(props.id, like)
         .then(ans => {
-            console.log(ans);
             setFavorites(ans);
         });
     }
     const replaceHandler = (e) => {
+        setText("");
         navigate(`/posts/${props.id}`);
     }
     return (

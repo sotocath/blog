@@ -40,7 +40,6 @@ const AddPost = () => {
     useEffect(() => {
         if (id) {
             api.getPost(id).then(data => {
-                console.log(data);
                 setTitle(data.title || "");
                 setImg(data.image || "");
                 setContent(data.text || "")

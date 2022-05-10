@@ -20,7 +20,6 @@ const Post = (props) => {
     const [newComm, setNewComm] = useState("");
     useEffect(() => {
         api.getPost(id).then(data => {
-            console.log(data)
             setLike(data.likes.includes(user));
             setPost(data);
         });
@@ -30,12 +29,10 @@ const Post = (props) => {
     }, [])
 
     const likeHandler = (e) => {
-        console.log(props);
         e.stopPropagation();
         setLike(!like);
         api.setPostLike(id, like)
             .then(ans => {
-                console.log(ans);
                 setFavorites(ans);
             });
     }

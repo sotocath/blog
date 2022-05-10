@@ -14,7 +14,6 @@ export default ({login}) =>{
         e.preventDefault();
         if(login){
             api.login({email: val, password: pwd}).then(ans=>{
-                console.log(ans);
                 if(ans.data){
                     setUser(ans.data._id);
                     setToken(ans.token)
@@ -23,11 +22,8 @@ export default ({login}) =>{
             })
         }else{
             api.signup({email: val, password: pwd}).then(ans=>{
-                // if(ans._id || ans.err.statusCode === 409){
-
-                //     console.log(ans);
+               
                     nav("/signin");
-                // }
                
         })
     }

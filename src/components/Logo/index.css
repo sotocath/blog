@@ -12,9 +12,6 @@
 }
 .logoText{
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-around;
     margin-left: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -25,7 +22,6 @@
 }
 .logoSmall{
     font-size: 18px;
-    margin-top: -15px;
 }
 
 .logo.small .logo__pic {

@@ -2,17 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 
 import api from "../Api";
 import Card from "../components/Card";
-import { FavCtx } from "../context/FavoritesContext";
 import { usePagination } from "../Hooks/hooks";
 import { PostsCtx } from "../context/PostsContext";
 
 
-const Catalog = ({ updFav }) => {
-    // const cards = 
-    // const [cards, updCards] = useState([]);
-    const{posts,text,search}=useContext(PostsCtx)
-    // const [post, updPosts] = useState(cards);
-    const { setFavorites } = useContext(FavCtx);
+const Catalog = () => {
+    const{ text,search }=useContext(PostsCtx);
     const dataPag = usePagination(search(), 9);
     const [page, setPage] = useState(1);
     function changePage(e){
@@ -24,6 +19,9 @@ const Catalog = ({ updFav }) => {
     function setPagination(n, curPage) {
         const visiblePages = 3;
         let arr = [];
+        if (n === 0) {
+            return [];
+        }
 
         arr.push(<div className="page-numbers" key="first" onClick={() => changePage(1)}>&laquo;</div>);
         arr.push(<div className="page-numbers" key="previous" onClick={() => changePage((curPage - 1) < 1 ? 1 : (curPage - 1))}>&lt;</div>);
@@ -32,21 +30,22 @@ const Catalog = ({ updFav }) => {
         let startPage = curPage - visiblePages - 1;
         if (startPage < 0) {
             startPage = 0;
+            
         }
         
         let endPage = curPage + visiblePages;
         if (endPage >= n) {
             endPage = n;
         }
-
+        
         let diff = endPage - startPage;
         if (diff < visiblePages * 2 + 1) {
             if (startPage === 0) {
-                endPage += visiblePages * 2 + 1 - diff;
+                endPage = Math.min(n, endPage + visiblePages * 2 + 1 - diff);
             }
 
             if (endPage === n) {
-                startPage -= visiblePages * 2 + 1 - diff;
+                startPage = Math.max(0, startPage - visiblePages * 2 + 1 - diff);
             }
         }
 
@@ -67,20 +66,7 @@ const Catalog = ({ updFav }) => {
             api.token = token;
         }
         let user = localStorage.getItem("user");
-        // if(!cards.length){
-        // api.getPostsList().then(posts => {
-        //     console.log(posts);
-        //     updCards(posts);
-        //     updFav(posts.filter(el => el.likes.includes(user)))
-        //     updPosts(posts);
-
-        // });
-        // }
-        // if (cards) {
-            
-        //     updPosts(cards.filter(el => el.title.toLowerCase().includes(searchText.toLowerCase())));
-
-        // }
+     
     }, []);
 
     return (
@@ -93,10 +79,7 @@ const Catalog = ({ updFav }) => {
            
             <div className="cards-container">
                 {dataPag.current().map(el =>
-                    // <Link to={"/posts/"+el._id} key={el._id}> 
                     <Card text={el.title} key={el._id} pic={el.image} author={(el.author || {}).name || ""} id={el._id} likes={el.likes} />
-
-                    // </Link>
                 )}
             </div>
         </>

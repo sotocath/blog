@@ -3,7 +3,7 @@ import "./index.css";
 import close from "./img/close.svg";
 import icon from "./img/search.svg";
 import { PostsCtx } from "../../context/PostsContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 
@@ -11,6 +11,7 @@ const Search = (props) => {
     
     const { text, setText, search } = useContext(PostsCtx)
     const [val, updateVal] = useState(text);
+    const location = useLocation();
     const changeText = (e) => {
         updateVal(e.target.value);
         setText(e.target.value);
@@ -19,6 +20,8 @@ const Search = (props) => {
         updateVal("");
         setText("");
     };
+    const searchResults = search();
+
     return (
         <div className="search__form">
             <form>
@@ -27,9 +30,10 @@ const Search = (props) => {
                     {val ? <img className="close" src={close} onClick={clearText} /> : <img className="icon" src={icon} />}
                 </button>
             </form>
-            {text && search().length ?
+            {text && searchResults.length && location.pathname!=="/" ?
             <div className="search__results">
-                {search().map((el, i) => <Link key={i} to={"/posts/" + el._id}>{el.title}</Link>)}
+                {searchResults.slice(0,5).map((el, i) => <Link key={i} onClick={clearText} to={"/posts/" + el._id} >{el.title}</Link>)}
+                {searchResults.length>5 ? <Link to="/">Показать больше результатов...</Link> : ""}
 
             </div> : ""}
         </div>
