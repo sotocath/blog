@@ -72,6 +72,14 @@ class Api {
             body: JSON.stringify(body)
         }).then(resHandler);
     }
+    deletePostComment(postId,commentId){
+        return fetch(`${this.path}/posts/comments/${postId}/${commentId}`, {
+            method: "DELETE",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        }).then(resHandler);
+    }
     setPostLike(id,isLike){
         return fetch(`${this.path}/posts/likes/${id}`, {
             method: isLike ? "DELETE" : "PUT",

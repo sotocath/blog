@@ -111,6 +111,7 @@ h4{
     gap: 40px;
     border-radius: 10px 100px / 120px;
     word-wrap: break-word;
+    position: relative;
 }
 .single__comms>p{
     margin-left: 50px;
@@ -145,4 +146,13 @@ h4{
 .buttons__edit{
     display: flex;
     gap: 20px;
+}
+.comms__delete{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    cursor: pointer;
 }

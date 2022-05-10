@@ -68,11 +68,24 @@ const Catalog = () => {
         let user = localStorage.getItem("user");
      
     }, []);
+    const getWord = (n, w1, w2, w0) => {
+        if (n % 100 < 11 || n % 100 > 14) {
+            if (n % 10 === 1) {
+                return w1;
+            } else if (n % 10 >= 2 && n % 10 <= 4) {
+                return w2;
+            } else {
+                return w0;
+            }
+        } else {
+            return w0;
+        }
+    }
 
     return (
         <>
             <h1>Все посты</h1>
-            {text && <div className="searchItem">По запросу <strong>{text}</strong> найдено {search().length} статей</div>}
+            {text && <div className="searchItem">По запросу <strong>{text}</strong> найдено {search().length} {getWord(search().length, "статья","статьи","статей")} </div>}
             <div className="page-container">
                 {setPagination(dataPag.maxPage, page)}
             </div>

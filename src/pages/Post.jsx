@@ -8,6 +8,7 @@ import { FavCtx } from "../context/FavoritesContext";
 import { UserCtx } from "../context/UserContext";
 import authorImg from "../components/Logo/img/earth-asia-solid.svg";
 import editImg from "../accets/pencil-solid.svg";
+import deleteImg from "../accets/trash.svg";
 
 const Post = (props) => {
     let { id } = useParams();
@@ -15,6 +16,7 @@ const Post = (props) => {
     const { user } = useContext(UserCtx);
     const [like, setLike] = useState(false);
     const [post, setPost] = useState({});
+    const [likeCnt,setLikeCnt] = useState(0);
 
     const [comments, setComments] = useState([]);
     const [newComm, setNewComm] = useState("");
@@ -22,6 +24,7 @@ const Post = (props) => {
         api.getPost(id).then(data => {
             setLike(data.likes.includes(user));
             setPost(data);
+            setLikeCnt((data.likes || []).length)
         });
         api.getPostComments(id).then(data => {
             setComments(data);
@@ -31,7 +34,9 @@ const Post = (props) => {
     const likeHandler = (e) => {
         e.stopPropagation();
         setLike(!like);
+        setLikeCnt(like? likeCnt-1 : likeCnt+1);
         api.setPostLike(id, like)
+
             .then(ans => {
                 setFavorites(ans);
             });
@@ -60,7 +65,15 @@ const Post = (props) => {
                 });
             })
     }
-
+    const deleteCommentHandler = (e, commentId) => {
+        e.preventDefault();
+        api.deletePostComment(id,commentId)
+            .then(ans => {
+                api.getPostComments(id).then(data => {
+                    setComments(data);
+                });
+            })
+    }
 
     let st = {
         backgroundImage: `url(${post.image})`
@@ -69,11 +82,11 @@ const Post = (props) => {
     return (
 
         <div className="singlPost-container">
-            <div className="post__edit">
+            {post.author && post.author._id===user &&<div className="post__edit">
                 <Link to={`/posts/${id}/edit`}>
                     <img src={editImg} width="20px" height="20px" />
                 </Link>
-            </div>
+            </div>}
             {post.image && <div className="pict" style={st}>
             </div>}
 
@@ -92,7 +105,7 @@ const Post = (props) => {
             <div className="textBlock">
                 <div className="text_post">{formatNewLine(post.text)}</div>
                 {<img className="post__like" src={like ? likeTrue : likeFalse} onClick={likeHandler} />}
-                <span className="post__likes">{(post.likes || []).length}</span>
+                <span className="post__likes">{likeCnt}</span>
             </div>
 
             <div className="comms">
@@ -100,7 +113,9 @@ const Post = (props) => {
                 {comments.map(el => <div className="single__comms" key={el._id}><div className="comms__author">
                     <div className="comms__avatar"><img src={el.author.avatar || authorImg} /></div>{el.author.name}
                 </div>
-                    {formatNewLine(el.text)}</div>)}
+                    {formatNewLine(el.text)} 
+                    {el.author._id===user && <span className="comms__delete"><img src={deleteImg} onClick={(e)=>deleteCommentHandler(e, el._id)}/></span>}
+                    </div>)}
             </div>
             <div >
                 <form className="comms__form" onSubmit={addCommentHandler}>

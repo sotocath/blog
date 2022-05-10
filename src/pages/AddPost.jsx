@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../Api";
+import { UserCtx } from "../context/UserContext";
 
 const AddPost = () => {
     const [title, setTitle] = useState("");
@@ -8,6 +9,7 @@ const AddPost = () => {
     const [content, setContent] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
+    const {user} = useContext(UserCtx);
     const handler = (e) => {
         e.preventDefault();
         if (id) {
@@ -40,6 +42,10 @@ const AddPost = () => {
     useEffect(() => {
         if (id) {
             api.getPost(id).then(data => {
+                if(data.author._id!==user){
+                    navigate(`/posts/${id}`);
+                    return;
+                }
                 setTitle(data.title || "");
                 setImg(data.image || "");
                 setContent(data.text || "")
