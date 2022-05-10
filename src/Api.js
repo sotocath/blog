@@ -11,7 +11,7 @@ class Api {
     }
     getPostsList() {
         return fetch(`${this.path}/posts`, {
-            method:"get",
+            method:"GET",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -19,7 +19,7 @@ class Api {
     }
     getPost(id) {
         return fetch(`${this.path}/posts/${id}`, {
-            method:"get",
+            method:"GET",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -27,7 +27,7 @@ class Api {
     }
     addPost(body){
         return fetch(`${this.path}/posts`, {
-            method: "post",
+            method: "POST",
             headers: {
                 "authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json"
@@ -37,7 +37,7 @@ class Api {
     }
     editPost(id, body){
         return fetch(`${this.path}/posts/${id}`, {
-            method: "patch",
+            method: "PATCH",
             headers: {
                 "authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json"
@@ -47,7 +47,7 @@ class Api {
     }
     deletePost(id){
         return fetch(`${this.path}/posts/${id}`, {
-            method: "delete",
+            method: "DELETE",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -57,7 +57,7 @@ class Api {
 
     getPostComments(id) {
         return fetch(`${this.path}/posts/comments/${id}`, {
-            method:"get",
+            method:"GET",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -65,7 +65,7 @@ class Api {
     }
     addPostComment(id, body){
         return fetch(`${this.path}/posts/comments/${id}`, {
-            method: "post",
+            method: "POST",
             headers: {
                 "authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json"
@@ -75,7 +75,7 @@ class Api {
     }
     setPostLike(id,isLike){
         return fetch(`${this.path}/posts/likes/${id}`, {
-            method: isLike ? "delete" : "put",
+            method: isLike ? "DELETE" : "PUT",
             headers: {
                 "authorization": `Bearer ${this.token}`
             }
@@ -83,8 +83,36 @@ class Api {
     }
     signup(body){
         return fetch(`${this.path}/signup`, {
-            method: "post",
+            method: "POST",
             headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
+    getAboutMe(){
+        return fetch(`${this.path}/users/me`, {
+            method: "GET",
+            headers: {
+                "authorization": `Bearer ${this.token}`
+            }
+        }).then(resHandler);
+    }
+    editAboutMe( body){
+        return fetch(`${this.path}/users/me`, {
+            method: "PATCH",
+            headers: {
+                "authorization": `Bearer ${this.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }).then(resHandler);
+    }
+    editMyAvatar( body){
+        return fetch(`${this.path}/users/me/avatar`, {
+            method: "PATCH",
+            headers: {
+                "authorization": `Bearer ${this.token}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
@@ -92,7 +120,7 @@ class Api {
     }
     login(body){
         return fetch(`${this.path}/signin`, {
-            method: "post",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -103,7 +131,6 @@ class Api {
 const config = {
     path: "https://api.react-learning.ru",
     token: localStorage.getItem("token")
-    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac"
 }
 const api = new Api(config);
 

@@ -28,10 +28,12 @@ const Post = (props) => {
             setComments(data);
         });
     }, [])
+
     const likeHandler = (e) => {
+        console.log(props);
         e.stopPropagation();
         setLike(!like);
-        api.setPostLike(props.id, like)
+        api.setPostLike(id, like)
             .then(ans => {
                 console.log(ans);
                 setFavorites(ans);
