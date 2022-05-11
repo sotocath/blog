@@ -45,7 +45,18 @@ const App = () => {
     }
 
     const searchHandler = () =>{
-       return posts.filter( el => el.title.toLowerCase().includes(searchText.toLowerCase()));
+       return posts
+            .filter( el => el.title.toLowerCase().includes(searchText.toLowerCase()))
+            .sort((first,second)=>{
+                if(first.created_at<second.created_at){
+                    return 1;
+                }
+                if(first.created_at>second.created_at){
+                    return -1;
+                } 
+                return 0;
+            })
+        ;
         
     }
 

@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import { useNavigate} from "react-router-dom";
 import api from "../Api";
 import Card from "../components/Card";
 import { usePagination } from "../Hooks/hooks";
 import { PostsCtx } from "../context/PostsContext";
+import { UserCtx } from "../context/UserContext";
 
 
 const Catalog = () => {
     const{ text,search }=useContext(PostsCtx);
     const dataPag = usePagination(search(), 9);
     const [page, setPage] = useState(1);
+    const { user } = useContext(UserCtx);
+    const navigate = useNavigate();
     function changePage(e){
         setPage(e);
         dataPag.jump(e);
@@ -45,7 +48,7 @@ const Catalog = () => {
             }
 
             if (endPage === n) {
-                startPage = Math.max(0, startPage - visiblePages * 2 + 1 - diff);
+                startPage = Math.max(0, startPage - (visiblePages * 2 + 1 - diff));
             }
         }
 
@@ -61,12 +64,15 @@ const Catalog = () => {
     };
 
     useEffect(() => {
+        if(!user){
+            navigate("/signin");
+            return;
+        }
+
         let token = localStorage.getItem("token");
         if (token) {
             api.token = token;
         }
-        let user = localStorage.getItem("user");
-     
     }, []);
     const getWord = (n, w1, w2, w0) => {
         if (n % 100 < 11 || n % 100 > 14) {
@@ -84,7 +90,7 @@ const Catalog = () => {
 
     return (
         <>
-            <h1>Все посты</h1>
+            
             {text && <div className="searchItem">По запросу <strong>{text}</strong> найдено {search().length} {getWord(search().length, "статья","статьи","статей")} </div>}
             <div className="page-container">
                 {setPagination(dataPag.maxPage, page)}

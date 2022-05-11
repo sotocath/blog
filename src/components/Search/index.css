@@ -36,4 +36,5 @@ form{
 }
 .search__form{
     position: relative;
+    width: 400px;
 }
