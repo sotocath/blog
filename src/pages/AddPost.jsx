@@ -12,23 +12,25 @@ const AddPost = () => {
     const {user} = useContext(UserCtx);
     const handler = (e) => {
         e.preventDefault();
+        let data = {
+            title: title,
+            text: content,
+            tags: []
+        };
+
+        if (img) {
+            data.image = img;
+        }
+
         if (id) {
-            api.editPost(id, {
-                title: title,
-                text: content,
-                image: img,
-                tags: []
-            }).then(ans => {
+            api.editPost(id, data).then(ans => {
                 navigate(`/posts/${ans._id}`);
             })
         } else {
-            api.addPost({
-                title: title,
-                text: content,
-                image: img,
-                tags: []
-            }).then(ans => {
-                navigate(`/posts/${ans._id}`);
+            api.addPost(data).then(ans => {
+                if (ans._id) {
+                    navigate(`/posts/${ans._id}`);
+                }
             })
         }
     }
@@ -61,7 +63,7 @@ const AddPost = () => {
                 <label>Добавить название поста</label>
                 <input type="text" placeholder="название поста" name="text" value={title} required onInput={e => setTitle(e.target.value)} />
                 <label>Добавить ссылку на картинку</label>
-                <input type="text" placeholder="ссылка на картинку" name="image" value={img} required onInput={e => setImg(e.target.value)} />
+                <input type="text" placeholder="ссылка на картинку" name="image" value={img}  onInput={e => setImg(e.target.value)} />
                 <label>Добавить текст поста</label>
                 <textarea name="content" placeholder="текст поста" value={content} required onInput={e => setContent(e.target.value)}></textarea>
                 <div className="buttons">
